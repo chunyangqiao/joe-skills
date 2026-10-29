@@ -6,6 +6,7 @@ Agent Orchestration coordinates subagents and generates profiles for Codex, Clau
 
 The complete installable skill lives in `skills/agent-orchestration/`. Paths in the following skill inventory are relative to that directory:
 
+- `README.md` and `README.zh-CN.md` are the skill guides.
 - `SKILL.md` defines the coordination workflow.
 - `scripts/configure.mjs` is the CLI. `scripts/lib/` contains document loading, configuration, installation, and bootstrap.
 - `docs/roles/*.md` holds one role each: a JSON header for description, access, and when to delegate, then the duty text. `docs/common.md` is shared child text and is not a role. `docs/hosts/*.json` holds official links, limits, encoding, paths, and recommended pins.
@@ -16,7 +17,7 @@ Repository development files stay at the root:
 
 - `tests/*.test.mjs` exercises CLI, installation, and bootstrap. Legacy fixtures preserve rejected Python v1 configuration evidence.
 - `package.json`, the lockfile, and formatting/hook configuration provide development tools and repository command shortcuts.
-- README files and `AGENTS.md` describe installation and contribution. The root license is also included in the installable skill.
+- The root README files describe the skill collection. Each skill includes `README.md` and `README.zh-CN.md`. `AGENTS.md` describes contribution. The root license is also included in each installable skill.
 
 ## Build, Test, and Development Commands
 
