@@ -1,6 +1,6 @@
 {
   "name": "agent-orchestration",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A personal collection of agent skills for multi-agent orchestration and Oxc pre-commit checks.",
   "keywords": [],
   "license": "MIT",

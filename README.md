@@ -2,7 +2,7 @@
 
 **English** | [简体中文](README.zh-CN.md)
 
-**Version: 1.0.0**
+**Version: 1.0.1**
 
 A personal collection of agent skills.
 

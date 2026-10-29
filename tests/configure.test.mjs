@@ -372,14 +372,36 @@ test('tool overrides replace defaults; browser roles remain read-only', () => {
   }
 });
 
-test('presets and Kimi snippets preserve alias/model/strength mapping without host writes', (t) => {
+test('Codex recommended roles retain model and strength in profiles and dispatch cards', () => {
   const config = defaultConfig('codex', 'recommended');
-  assert.deepEqual(config.roles.reviewer, { model: 'gpt-6-astra', strength: 'high' });
-  assert.deepEqual(config.roles['browser-debugger'], { model: 'gpt-6.1-sol', strength: 'high' });
-  assert.deepEqual(config.roles['ui-styler'], { model: 'gpt-6.1-sol', strength: 'medium' });
-  assert.throws(() => defaultConfig('claude-code', 'recommended'), /No recommended/);
+  const expected = {
+    explorer: { model: 'gpt-6-luna', strength: 'high' },
+    'docs-researcher': { model: 'gpt-6-luna', strength: 'high' },
+    'browser-debugger': { model: 'gpt-6.1-terra', strength: 'medium' },
+    executor: { model: 'gpt-6.1-terra', strength: 'medium' },
+    'ui-styler': { model: 'gpt-6.1-terra', strength: 'medium' },
+    implementer: { model: 'gpt-6.1-sol', strength: 'high' },
+    reviewer: { model: 'gpt-6-astra', strength: 'high' },
+  };
+  assert.deepEqual(config.roles, expected);
+  const files = render(config);
+  const card = JSON.parse(files[RUNTIME]);
+  for (const [role, intent] of Object.entries(expected)) {
+    const profile = toml(files[`crew-${role}.toml`]);
+    assert.equal(profile.model, intent.model);
+    assert.equal(profile.model_reasoning_effort, intent.strength);
+    assert.deepEqual(card.roles[role], {
+      pinned_model: intent.model,
+      pinned_effort: intent.strength,
+      spawn: null,
+    });
+  }
   config.roles.reviewer.model = 'local';
   assert.equal(defaultConfig('codex', 'recommended').roles.reviewer.model, 'gpt-6-astra');
+});
+
+test('presets and Kimi snippets preserve alias/model/strength mapping without host writes', (t) => {
+  assert.throws(() => defaultConfig('claude-code', 'recommended'), /No recommended/);
   const f = fixture(t, 'kimi-code');
   const kimi = defaultConfig('kimi-code', 'recommended');
   f.save(kimi);

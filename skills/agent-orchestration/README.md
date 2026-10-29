@@ -94,6 +94,24 @@ node scripts/configure.mjs check --config ~/.config/crew/codex.json --scope user
 - Preview creates no files or directories. `--apply` writes only the source configuration and managed profiles. Keep the source outside the skill and managed Agent directories. Bootstrap does not copy the skill itself.
 - The JSON result identifies configuration creation/reuse and static check status. `runtime_verified: false` means live host loading and execution still need verification, even after static checks pass.
 
+### Codex recommended models
+
+The `--preset recommended` choices below were checked on **2026-10-29**. The default preset remains `inherit`; existing source configurations are reused unchanged.
+
+| Role | Model | Strength |
+| --- | --- | --- |
+| explorer | `gpt-6-luna` | `high` |
+| docs-researcher | `gpt-6-luna` | `high` |
+| browser-debugger | `gpt-6.1-terra` | `medium` |
+| executor | `gpt-6.1-terra` | `medium` |
+| ui-styler | `gpt-6.1-terra` | `medium` |
+| implementer | `gpt-6.1-sol` | `high` |
+| reviewer | `gpt-6-astra` | `high` |
+
+This project maps the official model guidance to its roles: Luna for focused discovery and source verification, Terra for visual work, computer use, and localized implementation, Sol for complex implementation, and Astra for review requiring judgment. The role mappings and strengths are project recommendations based on the [API model catalog](https://developers.openai.com/api/docs/models), [model selection guide](https://developers.openai.com/api/docs/guides/model-selection), and [Codex model documentation](https://developers.openai.com/codex/models). They have not been validated through same-task model comparisons.
+
+GPT-6.1 Terra requires **Codex CLI 0.159.0+**. Confirm that your account and client expose the selected models, and verify the generated profiles in a live session. Static checks establish generation and installation only.
+
 ### Commands
 
 Run these from the installed skill directory. From another working directory, use the absolute path to `scripts/configure.mjs`.

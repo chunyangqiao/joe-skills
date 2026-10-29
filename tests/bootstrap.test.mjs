@@ -83,13 +83,22 @@ test('recommended presets and Kimi manual setup remain visible', (t) => {
     const preview = JSON.parse(
       cli(f.root, ['bootstrap', ...f.args, '--preset', 'recommended']).stdout,
     );
+    assert.deepEqual(snapshot(f.root), {});
     assert.deepEqual(preview.configuration, defaultConfig(host, 'recommended'));
     if (host === 'kimi-code') assert.ok(preview.host_setup.content.includes('[models.'));
     const applied = JSON.parse(
       cli(f.root, ['bootstrap', ...f.args, '--preset', 'recommended', '--apply']).stdout,
     );
+    assert.equal(applied.status, 'applied');
+    assert.equal(applied.static_check.status, 'passed');
+    assert.equal(applied.runtime_verified, false);
     assert.deepEqual(readJson(f.config), defaultConfig(host, 'recommended'));
     assert.deepEqual(applied.host_setup, preview.host_setup);
+    const checked = JSON.parse(
+      cli(f.root, ['check', '--config', f.config, '--scope', 'project', '--root', f.root]).stdout,
+    );
+    assert.equal(checked.status, 'current');
+    assert.equal(checked.runtime_verified, false);
   }
 });
 

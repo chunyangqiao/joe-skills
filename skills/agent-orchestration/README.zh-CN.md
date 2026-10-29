@@ -93,6 +93,24 @@ node scripts/configure.mjs check --config ~/.config/crew/codex.json --scope user
 - 预览不会创建文件或目录。`--apply` 只写入源配置和托管的角色配置。源配置应保存在技能目录及托管 Agent 目录之外。引导命令不会复制技能本身。
 - JSON 结果会标明配置是新建还是复用，以及静态检查状态。`runtime_verified: false` 表示仍需验证宿主是否实际加载并执行配置，即使静态检查已经通过。
 
+### Codex 推荐模型
+
+以下 `--preset recommended` 方案的核对日期为 **2026-10-29**。默认预设仍为 `inherit`；已有源配置会原样复用。
+
+| 角色 | 模型 | 思考强度 |
+| --- | --- | --- |
+| explorer | `gpt-6-luna` | `high` |
+| docs-researcher | `gpt-6-luna` | `high` |
+| browser-debugger | `gpt-6.1-terra` | `medium` |
+| executor | `gpt-6.1-terra` | `medium` |
+| ui-styler | `gpt-6.1-terra` | `medium` |
+| implementer | `gpt-6.1-sol` | `high` |
+| reviewer | `gpt-6-astra` | `high` |
+
+本项目按官方模型定位分配角色：Luna 用于聚焦探索和来源查证，Terra 用于视觉操作、计算机操作和局部实现，Sol 用于复杂实现，Astra 用于需要判断力的审查。角色映射和思考强度是本项目依据[API 模型目录](https://developers.openai.com/api/docs/models)、[模型选择指南](https://developers.openai.com/api/docs/guides/model-selection)及[Codex 模型文档](https://developers.openai.com/codex/models)作出的推荐，尚未经同任务模型对比验证。
+
+GPT-6.1 Terra 要求 **Codex CLI 0.159.0+**。请确认账号和客户端提供所选模型，并在实际会话中验证生成的角色配置。静态检查仅验证生成和安装结果。
+
 ### 命令
 
 在已安装的技能目录中运行。在其他工作目录中执行时，使用 `scripts/configure.mjs` 的绝对路径。
