@@ -12,6 +12,22 @@ export function copySkill(destination) {
   fs.cpSync(SKILL_ROOT, destination, { recursive: true });
   return path.join(destination, 'scripts/configure.mjs');
 }
+export function skipWithoutSymlink(t) {
+  const probe = path.join(os.tmpdir(), `crew-symlink-${process.pid}`);
+  fs.rmSync(probe, { force: true });
+  try {
+    fs.symlinkSync(os.tmpdir(), probe, 'dir');
+    return false;
+  } catch (error) {
+    if (error.code === 'EPERM' || error.code === 'EACCES') {
+      t.skip('symlinks are not permitted');
+      return true;
+    }
+    throw error;
+  } finally {
+    fs.rmSync(probe, { force: true });
+  }
+}
 export function temporary(t) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'crew-test-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));

@@ -1,0 +1,7 @@
+interface:
+  display_name: 'Setup Oxc Pre-Commit'
+  short_description: 'Configure Oxfmt, Oxlint, and pre-commit checks'
+  default_prompt: 'Use $setup-oxc-pre-commit to configure Oxfmt formatting, Oxlint linting, and Husky + lint-staged pre-commit checks in this repository.'
+
+policy:
+  allow_implicit_invocation: true

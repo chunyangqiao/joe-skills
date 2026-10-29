@@ -15,7 +15,7 @@ import {
   atomicWrite,
   targetDirectory,
 } from '../skills/agent-orchestration/scripts/lib/install.mjs';
-import { cli, copySkill, snapshot, temporary } from './helpers.mjs';
+import { cli, copySkill, skipWithoutSymlink, snapshot, temporary } from './helpers.mjs';
 
 function fixture(t, host = 'codex') {
   const root = temporary(t);
@@ -59,7 +59,9 @@ for (const host of hostIds()) {
     const env = { ...process.env };
     const expected = path.join(home, 'agents');
     if (host === 'cursor') {
+      // Node reads HOME on POSIX and USERPROFILE on Windows.
       env.HOME = home;
+      env.USERPROFILE = home;
     } else env[variable] = home;
     const result = cli(
       f.root,
@@ -149,6 +151,7 @@ test('invalid existing source and host mismatch leave all files untouched', (t) 
 });
 
 test('source config cannot live in skill or managed directory, including symlink aliases', (t) => {
+  if (skipWithoutSymlink(t)) return;
   const f = fixture(t);
   const alias = path.join(f.root, 'skill-link');
   const targetAlias = path.join(f.root, 'managed-link');
@@ -292,6 +295,7 @@ for (const host of hostIds()) {
     const target = targetDirectory(host, 'project', root);
     const skillAlias = path.join(root, 'skill-link');
     const targetAlias = path.join(root, 'managed-link');
+    if (skipWithoutSymlink(t)) return;
     fs.symlinkSync(skill, skillAlias, 'dir');
     fs.symlinkSync(target, targetAlias, 'dir');
     const installed = snapshot(root, true);

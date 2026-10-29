@@ -8,6 +8,13 @@
 
 使用职责明确的子智能体完成代码探索、资料研究、实现、浏览器操作和独立审查。主智能体负责控制任务范围、架构设计、结果集成和最终验收。显式调用并提供具体任务时，必须派发至少一个真实子智能体；隐式采用时，仍按委派收益决定是否派发。
 
+## 仓库中的技能
+
+| 技能 | 说明 |
+| --- | --- |
+| [agent-orchestration](skills/agent-orchestration/SKILL.md) | 面向 Codex、Claude Code、Kimi Code 和 Cursor 的可移植多智能体编排技能。 |
+| [setup-oxc-pre-commit](skills/setup-oxc-pre-commit/SKILL.md) | 自动为 JavaScript / TypeScript 项目配置 Oxfmt、Oxlint、Husky 和 lint-staged，实现代码自动格式化、静态检查与 Git 提交前质量校验。 |
+
 ## 功能
 
 - 七种共享角色，为不同宿主生成原生配置。
@@ -144,6 +151,10 @@ skills/agent-orchestration/  # 完整的可安装技能
   references/               # 评估和交互式测试
   agents/openai.yaml        # 技能 UI 元数据
   LICENSE                   # 随技能分发的许可证
+skills/setup-oxc-pre-commit/ # Oxc 格式化、静态检查与提交前校验技能
+  SKILL.md                  # 配置工作流程
+  agents/openai.yaml        # 技能 UI 元数据
+  LICENSE                   # 随技能分发的许可证
 tests/                      # 仓库测试和旧版夹具
 package.json                # 开发工具和仓库快捷命令
 ```
@@ -158,7 +169,7 @@ pnpm format:check
 pnpm test
 ```
 
-使用 `pnpm format` 格式化脚本和测试。使用 `pnpm lint-staged` 通过 Oxfmt 格式化暂存的 `.mjs`、JSON 和 YAML 文件，排除锁文件和旧版测试夹具。在 Git 检出目录中，`pnpm prepare` 会启用 Husky 的 pre-commit 钩子，依次执行 `pnpm lint-staged` 和 `pnpm test`。
+使用 `pnpm format` 以 LF 换行格式化 `.mjs`、JSON 和 YAML 文件。使用 `pnpm lint-staged` 格式化暂存的同类文件。锁文件和旧版测试夹具排除在外。在 Git 检出目录中，`pnpm prepare` 会启用 Husky 的 pre-commit 钩子，依次执行 `pnpm lint-staged` 和 `pnpm test`。
 
 测试覆盖配置校验、角色配置生成、引导安装预览及安装后检查、安装冲突、幂等性、回滚，以及拒绝已保存的 schema 1 夹具。测试也会验证不依赖开发依赖的运行命令。宿主实际运行验收见[评估文档](skills/agent-orchestration/references/evaluation.md)，贡献指南见 [AGENTS.md](AGENTS.md)。
 

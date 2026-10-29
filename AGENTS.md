@@ -38,7 +38,7 @@ The direct repository entrypoint is `node skills/agent-orchestration/scripts/con
 
 ## Coding Style & Naming Conventions
 
-Use JavaScript ESM (`.mjs`), two-space indentation, `camelCase` functions, `PascalCase` classes, and `UPPER_CASE` constants. Keep runtime imports limited to Node.js built-ins and local modules. JSON uses two-space indentation and a trailing newline. Oxfmt formats scripts and tests using `.oxfmtrc.json`; no linter is configured.
+Use JavaScript ESM (`.mjs`), two-space indentation, `camelCase` functions, `PascalCase` classes, and `UPPER_CASE` constants. Keep runtime imports limited to Node.js built-ins and local modules. JSON uses two-space indentation and a trailing newline. Oxfmt formats `.mjs`, JSON, and YAML files with LF line endings using `.oxfmtrc.json`; the lockfile and legacy fixtures are excluded. No linter is configured.
 
 Use lowercase kebab-case role IDs, matching the skill's `docs/roles/<role>.md`; generated profile names start with `crew-`. Keep role headers, host files, and generator behavior consistent.
 
@@ -54,7 +54,7 @@ Use short, imperative commit summaries, optionally prefixed with `feat:`, `fix:`
 
 When committing, do not add any co-author attribution, and do not reveal the identity of the agent in commit messages, PR descriptions, or any explanatory text.
 
-In a Git checkout, `pnpm prepare` enables the Husky pre-commit hook, which formats staged scripts with lint-staged and runs `pnpm test`.
+In a Git checkout, `pnpm prepare` enables the Husky pre-commit hook, which formats staged `.mjs`, JSON, and YAML files with lint-staged and runs `pnpm test`.
 
 PRs should explain the behavior change, affected hosts, linked issues when applicable, test results, and runtime verification gaps. Include generated-output examples for profile changes.
 

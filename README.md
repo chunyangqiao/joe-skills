@@ -8,6 +8,13 @@ A portable multi-agent orchestration skill for Codex, Claude Code, Kimi Code, an
 
 Use focused subagents for exploration, research, implementation, browser work, and independent review. The main agent keeps responsibility for task scope, architecture, integration, and final acceptance. Explicit invocation with a concrete task requires at least one real subagent; implicit use remains conditional on the benefit of delegation.
 
+## Skills in this repository
+
+| Skill | Description |
+| --- | --- |
+| [agent-orchestration](skills/agent-orchestration/SKILL.md) | Portable multi-agent orchestration for Codex, Claude Code, Kimi Code, and Cursor. |
+| [setup-oxc-pre-commit](skills/setup-oxc-pre-commit/SKILL.md) | Automatically configure Oxfmt, Oxlint, Husky, and lint-staged for JavaScript / TypeScript projects, enabling automatic code formatting, static analysis, and Git pre-commit quality checks. |
+
 ## Features
 
 - Seven shared roles with host-specific native profiles.
@@ -145,6 +152,10 @@ skills/agent-orchestration/  # Complete installable skill
   references/               # Evaluation and interactive testing
   agents/openai.yaml        # Skill UI metadata
   LICENSE                   # License included with the skill
+skills/setup-oxc-pre-commit/ # Oxc formatting, linting, and pre-commit setup skill
+  SKILL.md                  # Setup workflow
+  agents/openai.yaml        # Skill UI metadata
+  LICENSE                   # License included with the skill
 tests/                      # Repository tests and legacy fixtures
 package.json                # Development tools and repository shortcuts
 ```
@@ -159,7 +170,7 @@ pnpm format:check
 pnpm test
 ```
 
-Use `pnpm format` to format scripts and tests. Use `pnpm lint-staged` to format staged `.mjs`, JSON, and YAML files with Oxfmt; the lockfile and legacy fixtures are excluded. In a Git checkout, `pnpm prepare` enables the Husky pre-commit hook, which runs `pnpm lint-staged` followed by `pnpm test`.
+Use `pnpm format` to format `.mjs`, JSON, and YAML files with LF line endings. Use `pnpm lint-staged` to format the same types when they are staged. The lockfile and legacy fixtures are excluded. In a Git checkout, `pnpm prepare` enables the Husky pre-commit hook, which runs `pnpm lint-staged` followed by `pnpm test`.
 
 Tests cover configuration validation, profile generation, bootstrap previews and post-install checks, installation conflicts, idempotency, rollback, and rejection of captured schema 1 fixtures. Runtime commands are also exercised without development dependencies. See [evaluation](skills/agent-orchestration/references/evaluation.md) for live host acceptance checks and [AGENTS.md](AGENTS.md) for contribution guidelines.
 

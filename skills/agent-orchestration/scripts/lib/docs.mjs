@@ -43,7 +43,10 @@ export function parseJson(text) {
 }
 
 export function readText(file) {
-  return new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(fs.readFileSync(file));
+  // Role fences are matched against LF. A Windows checkout can still present CRLF.
+  return new TextDecoder('utf-8', { fatal: true, ignoreBOM: true })
+    .decode(fs.readFileSync(file))
+    .replaceAll('\r\n', '\n');
 }
 export const readJson = (file) => parseJson(readText(file));
 export const jsonText = (value) => JSON.stringify(value, null, 2) + '\n';

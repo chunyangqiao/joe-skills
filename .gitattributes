@@ -1,0 +1,2 @@
+# Check out text as LF even when core.autocrlf is enabled.
+* text=auto eol=lf

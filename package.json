@@ -7,8 +7,8 @@
   "author": "",
   "type": "module",
   "scripts": {
-    "format": "oxfmt --write \"{scripts,skills/agent-orchestration/scripts,tests}/**/*.mjs\"",
-    "format:check": "oxfmt --check \"{scripts,skills/agent-orchestration/scripts,tests}/**/*.mjs\"",
+    "format": "oxfmt --write \"**/*.{mjs,json,yaml,yml}\"",
+    "format:check": "oxfmt --check \"**/*.{mjs,json,yaml,yml}\"",
     "lint-staged": "lint-staged",
     "test": "node --test tests/*.test.mjs",
     "configure": "node skills/agent-orchestration/scripts/configure.mjs",

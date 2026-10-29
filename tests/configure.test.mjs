@@ -32,7 +32,15 @@ import {
   installationPlan,
   targetDirectory,
 } from '../skills/agent-orchestration/scripts/lib/install.mjs';
-import { cli, copySkill, REPO_ROOT, SCRIPT, snapshot, temporary } from './helpers.mjs';
+import {
+  cli,
+  copySkill,
+  REPO_ROOT,
+  SCRIPT,
+  skipWithoutSymlink,
+  snapshot,
+  temporary,
+} from './helpers.mjs';
 
 function fixture(t, host = 'codex') {
   const root = temporary(t);
@@ -176,6 +184,7 @@ test('unmanaged same-name files block all writes', (t) => {
 });
 
 test('symlinked profiles, directory and manifest cannot redirect writes', (t) => {
+  if (skipWithoutSymlink(t)) return;
   const f = fixture(t);
   f.command('install', ['--apply']);
   const outside = path.join(f.root, 'outside');
@@ -516,7 +525,7 @@ test('custom home paths and CLI argument boundaries', (t) => {
   const cursorConfig = path.join(f.root, 'cursor.json');
   fs.writeFileSync(cursorConfig, jsonText(defaultConfig('cursor')));
   const cursor = cli(f.root, ['install', '--config', cursorConfig, '--scope', 'user'], 0, SCRIPT, {
-    env: { ...process.env, HOME: cursorHome },
+    env: { ...process.env, HOME: cursorHome, USERPROFILE: cursorHome },
   });
   assert.equal(JSON.parse(cursor.stdout).target, path.join(cursorHome, '.cursor', 'agents'));
   assert.equal(fs.existsSync(cursorHome), false);
@@ -605,6 +614,7 @@ test('role files and host prose have one owner', () => {
 });
 
 test('CLI remains executable through a symlinked skill directory', (t) => {
+  if (skipWithoutSymlink(t)) return;
   const root = temporary(t);
   const link = path.join(root, 'agent-orchestration');
   fs.symlinkSync(SKILL_ROOT, link, 'dir');
