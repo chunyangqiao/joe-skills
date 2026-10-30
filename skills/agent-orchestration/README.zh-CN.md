@@ -136,7 +136,7 @@ node scripts/configure.mjs check --config ~/.config/crew/codex.json --scope user
 
 编辑已保存的配置后，重新执行生成、预览、应用和检查步骤。检查成功仅验证已安装文件，不代表宿主已实际加载或执行配置。项目级和个人级配置是完整的替代关系，不会合并。
 
-在源码仓库中，仓库根目录的 `pnpm run configure <command>` 会转发到这个 CLI。这些快捷命令列在[仓库 README](../../README.zh-CN.md#配置快捷命令)。
+在源码仓库中，仓库根目录的 `pnpm run configure <command>` 会转发到这个 CLI。这些快捷命令列在 [AGENTS.md](../../AGENTS.md#build-test-and-development-commands)。
 
 Agent Orchestration 的旧名称为 Crew。为保持安装兼容性，现有的 `crew-*` 角色配置名、模型别名、状态文件和配置路径继续保留。角色职责在 [docs/roles](docs/roles)。宿主链接、限制和推荐模型在 [docs/hosts](docs/hosts)。
 

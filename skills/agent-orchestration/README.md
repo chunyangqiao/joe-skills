@@ -137,7 +137,7 @@ node scripts/configure.mjs check --config ~/.config/crew/codex.json --scope user
 
 After editing a saved configuration, repeat the render, preview, apply, and check steps. A successful check verifies installed files, not live host loading or execution. Project and user scopes are complete alternatives and are not merged.
 
-In the source repository, `pnpm run configure <command>` from the repository root forwards to this CLI. Those shortcuts are listed in the [repository README](../../README.md#configuration-shortcuts).
+In the source repository, `pnpm run configure <command>` from the repository root forwards to this CLI. Those shortcuts are listed in [AGENTS.md](../../AGENTS.md#build-test-and-development-commands).
 
 Agent Orchestration was previously named Crew. Existing `crew-*` profile and model alias names, state files, and configuration paths are retained for installation compatibility. Role duties live in [docs/roles](docs/roles). Host links, limits, and recommended pins live in [docs/hosts](docs/hosts).
 
