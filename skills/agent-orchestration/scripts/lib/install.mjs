@@ -1,7 +1,6 @@
+import { createHash, randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { createHash, randomUUID } from 'node:crypto';
-import { loadHost, loadRoles } from './docs.mjs';
 import {
   ConfigError,
   expandPath,
@@ -12,6 +11,7 @@ import {
   readJson,
   RUNTIME,
 } from './config.mjs';
+import { loadHost, loadRoles } from './docs.mjs';
 
 export const digest = (data) => createHash('sha256').update(data).digest('hex');
 export function stat(file) {

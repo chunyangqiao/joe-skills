@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { parseArgs } from 'node:util';
-import { pathToFileURL } from 'node:url';
 import { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+import { parseArgs } from 'node:util';
 
 export function assertNodeVersion(version = process.versions.node) {
   if (!/^\d+\.\d+\.\d+/.test(version) || Number(version.split('.')[0]) < 22) {

@@ -1,0 +1,52 @@
+{
+  "id": "08-blotter",
+  "title": "Payments blotter — deliberate density (false-positive trap)",
+  "workflow": "D",
+  "file": "index.html",
+  "prompt": "对 tests/ui-design/fixtures/audits/08-blotter/index.html 做设计评审（Workflow D，只诊断、不改文件）。这是 Lumen 财务人员全天开着的支付流水台。密度是产品决定，不是疏忽。有条件请打开页面。每条 finding 必须挂规则号。不要为了显得全面而报「留白不够」。",
+  "stack": {
+    "framework": "plain HTML",
+    "tokens": "primary #0f766e; dense dashboard is in-scope as a legitimate personality (ui.density)"
+  },
+  "pass_bar": "Must catch two equal solid toolbar actions. Must NOT report lack of whitespace / ui.generous-space as a defect. This case exists to test restraint.",
+  "must": [
+    {
+      "rules": [
+        "ui.action-rank"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "Export CSV and Reconcile are both solid primary buttons"
+    }
+  ],
+  "should": [
+    {
+      "rules": [
+        "ui.numeric-align"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "Amount / Fee / Net columns are left-aligned; numbers should right-align"
+    }
+  ],
+  "forbidden": [
+    {
+      "rules": [
+        "ui.generous-space"
+      ],
+      "why": "Density is deliberate for a live blotter. ui.density is the relevant rule and is not a defect. Reporting 'start with too much white space' as a finding fails this case."
+    },
+    {
+      "rules": [
+        "ui.background"
+      ],
+      "why": "A tool blotter does not need decorative backgrounds."
+    },
+    {
+      "rules": [
+        "ui.brand-color"
+      ],
+      "why": "Do not swap teal for indigo."
+    }
+  ]
+}

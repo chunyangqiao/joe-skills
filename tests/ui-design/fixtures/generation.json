@@ -1,0 +1,27 @@
+{
+  "cases": [
+    {
+      "id": "09-new-system",
+      "prompt": "使用 ui-design 为 Lumen 发票工具设计 Tailwind CSS v4 Design Token。品牌色 #0f766e。Tailwind 入口文件是 existing-system/theme.css，基础组件目录是 existing-system/。在该入口里补齐任务需要的语义角色和明暗主题，保留现有变量名与颜色写法。不要新建平行的 design-tokens.json、替换主题或新增组件文件。说明已运行与未运行的验收。",
+      "checks": [
+        "Brief records product goal, hierarchy, main action, and the token roles this entry must carry",
+        "Named Tailwind entry and component directory are read before editing",
+        "Semantic roles are written into existing-system/theme.css",
+        "Existing variable names, color format, and brand survive",
+        "No parallel design-tokens.json, replacement theme, or new component files",
+        "Source evidence and unverified checks are stated separately"
+      ]
+    },
+    {
+      "id": "10-existing-system",
+      "prompt": "使用 ui-design 调整 existing-system/ 里的 Button，使它的颜色和状态使用 existing-system/theme.css 中的语义角色。Tailwind 入口文件是 existing-system/theme.css，基础组件目录是 existing-system/。保留 Button 的现有 props。不重新建立主题，不安装依赖，不新建组件文件。说明已运行与未运行的验收。",
+      "checks": [
+        "Existing theme.css and button.tsx are inspected before choosing values",
+        "Existing CSS variables, Button props, and brand survive",
+        "Button colors and states use the entry's semantic roles",
+        "No parallel design-tokens.json, replacement theme, dependency installation, or new component files",
+        "Existing-system evidence and unverified checks are stated honestly"
+      ]
+    }
+  ]
+}

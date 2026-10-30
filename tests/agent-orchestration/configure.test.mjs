@@ -1,18 +1,12 @@
-import test from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
+import test from 'node:test';
 import { pathToFileURL } from 'node:url';
 import { parse as toml } from 'smol-toml';
 import { parse as yaml } from 'yaml';
-import { assertNodeVersion } from '../skills/agent-orchestration/scripts/configure.mjs';
-import {
-  hostIds,
-  loadCommon,
-  loadHost,
-  loadRoles,
-} from '../skills/agent-orchestration/scripts/lib/docs.mjs';
+import { assertNodeVersion } from '../../skills/agent-orchestration/scripts/configure.mjs';
 import {
   ConfigError,
   defaultConfig,
@@ -25,13 +19,19 @@ import {
   SKILL_ROOT,
   RUNTIME,
   validate,
-} from '../skills/agent-orchestration/scripts/lib/config.mjs';
+} from '../../skills/agent-orchestration/scripts/lib/config.mjs';
+import {
+  hostIds,
+  loadCommon,
+  loadHost,
+  loadRoles,
+} from '../../skills/agent-orchestration/scripts/lib/docs.mjs';
 import {
   atomicWrite,
   install,
   installationPlan,
   targetDirectory,
-} from '../skills/agent-orchestration/scripts/lib/install.mjs';
+} from '../../skills/agent-orchestration/scripts/lib/install.mjs';
 import {
   cli,
   copySkill,
@@ -118,7 +118,7 @@ for (const host of hostIds()) {
   });
 }
 
-const legacyHostDir = path.join(REPO_ROOT, 'tests/fixtures/host');
+const legacyHostDir = path.join(REPO_ROOT, 'tests/agent-orchestration/fixtures/host');
 for (const name of fs
   .readdirSync(legacyHostDir)
   .filter((item) => item.endsWith('.json'))

@@ -1,0 +1,48 @@
+{
+  "id": "06-article",
+  "title": "Help article — measure and centered long form",
+  "workflow": "D",
+  "file": "index.html",
+  "prompt": "对 tests/ui-design/fixtures/audits/06-article/index.html 做设计评审（Workflow D，只诊断、不改文件）。这是 Lumen 帮助中心的一篇正文。有条件请在桌面宽度（约 1280）打开页面看实际行长。每条 finding 必须挂规则号。",
+  "stack": {
+    "framework": "plain HTML",
+    "tokens": "none required"
+  },
+  "pass_bar": "Must catch body measure far outside 45–75 characters and centered long-form text. Line-height on the 40px heading is should.",
+  "must": [
+    {
+      "rules": [
+        "ui.measure"
+      ],
+      "severity": "P0",
+      "severity_floor": "P1",
+      "now": "Body has no max-width; at 1280px a line runs well past 75 characters (often 110–140)"
+    },
+    {
+      "rules": [
+        "ui.text-align"
+      ],
+      "severity": "P1",
+      "severity_floor": "P1",
+      "now": "text-align:center on the body, including multi-paragraph long form"
+    }
+  ],
+  "should": [
+    {
+      "rules": [
+        "ui.leading"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "40px heading sits at line-height 1.5, and the wide measure is also 1.5. Large headlines can sit tighter; wide columns want more line-height. The first fix for the wide column is still to constrain measure."
+    }
+  ],
+  "forbidden": [
+    {
+      "rules": [
+        "ui.empty-state"
+      ],
+      "why": "This is not an empty state."
+    }
+  ]
+}

@@ -9,6 +9,7 @@ A personal collection of agent skills.
 | Skill | Purpose |
 | --- | --- |
 | [agent-orchestration](skills/agent-orchestration/README.md) | Portable multi-agent orchestration for Codex, Claude Code, Kimi Code, and Cursor. |
+| [ui-design](skills/ui-design/README.md) | Design Tailwind CSS v4 tokens and adjust shadcn components in the user's project. |
 | [setup-oxc-pre-commit](skills/setup-oxc-pre-commit/README.md) | Configure Oxfmt, Oxlint, Husky, and lint-staged so JavaScript and TypeScript commits format and lint staged files. |
 
 Contribution guidelines are in [AGENTS.md](AGENTS.md).

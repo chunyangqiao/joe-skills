@@ -1,12 +1,12 @@
+import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import assert from 'node:assert/strict';
-import { SKILL_ROOT } from '../skills/agent-orchestration/scripts/lib/config.mjs';
+import { SKILL_ROOT } from '../../skills/agent-orchestration/scripts/lib/config.mjs';
 
-export const REPO_ROOT = fileURLToPath(new URL('../', import.meta.url));
+export const REPO_ROOT = fileURLToPath(new URL('../../', import.meta.url));
 export const SCRIPT = path.join(SKILL_ROOT, 'scripts/configure.mjs');
 export function copySkill(destination) {
   fs.cpSync(SKILL_ROOT, destination, { recursive: true });

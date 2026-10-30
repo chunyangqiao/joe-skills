@@ -1,0 +1,73 @@
+{
+  "id": "05-landing",
+  "title": "Marketing landing — AI-generated slop against an existing teal brand",
+  "workflow": "D",
+  "file": "index.html",
+  "prompt": "对 tests/ui-design/fixtures/audits/05-landing/index.html 做设计评审（Workflow D，只诊断、不改文件）。这是 Lumen 的营销首页。品牌规范已经确定：主色是 #0f766e（teal），不是 indigo。页面是另一次生成留下来的。有条件请打开页面。每条 finding 必须挂规则号。",
+  "stack": {
+    "framework": "plain HTML",
+    "tokens": "EXISTING primary is #0f766e. The page's indigo is the defect, not the spec."
+  },
+  "pass_bar": "Must notice the indigo/pink vs teal brand, the >30° gradient, and four equal filled CTAs. Centering a long hero paragraph should be caught or listed in should.",
+  "must": [
+    {
+      "rules": [
+        "ui.brand-color"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "Product brand is teal #0f766e; the page uses indigo #4f46e5 as primary (classic corpus default)"
+    },
+    {
+      "rules": [
+        "ui.background"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "Hero gradient runs indigo to pink and competes with the teal brand"
+    },
+    {
+      "rules": [
+        "ui.action-rank"
+      ],
+      "severity": "P1",
+      "severity_floor": "P1",
+      "now": "Four filled pill buttons, all primary-looking"
+    }
+  ],
+  "should": [
+    {
+      "rules": [
+        "ui.text-align"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "Hero body copy is several lines and still centered; text-align:center on body leaks"
+    },
+    {
+      "rules": [
+        "ui.icon"
+      ],
+      "severity": "P2",
+      "severity_floor": "P2",
+      "now": "Emoji as icons in the hero and feature row"
+    },
+    {
+      "rules": [
+        "ui.surface-text"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "Hero supporting text is grey (#e5e7eb) on a shifting colored gradient"
+    },
+    {
+      "rules": [
+        "ui.elevation"
+      ],
+      "severity": "P2",
+      "severity_floor": "P2",
+      "now": "Feature cards all use shadow-lg-scale elevation"
+    }
+  ],
+  "forbidden": []
+}

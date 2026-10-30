@@ -1,0 +1,4 @@
+# These tools use their platform packages; install-time native build scripts are unnecessary.
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: false

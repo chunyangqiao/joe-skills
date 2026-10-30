@@ -1,20 +1,20 @@
-import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { runBootstrap } from '../skills/agent-orchestration/scripts/lib/bootstrap.mjs';
-import { hostIds } from '../skills/agent-orchestration/scripts/lib/docs.mjs';
+import test from 'node:test';
+import { runBootstrap } from '../../skills/agent-orchestration/scripts/lib/bootstrap.mjs';
 import {
   defaultConfig,
   jsonText,
   MANIFEST,
   readJson,
   SKILL_ROOT,
-} from '../skills/agent-orchestration/scripts/lib/config.mjs';
+} from '../../skills/agent-orchestration/scripts/lib/config.mjs';
+import { hostIds } from '../../skills/agent-orchestration/scripts/lib/docs.mjs';
 import {
   atomicWrite,
   targetDirectory,
-} from '../skills/agent-orchestration/scripts/lib/install.mjs';
+} from '../../skills/agent-orchestration/scripts/lib/install.mjs';
 import { cli, copySkill, skipWithoutSymlink, snapshot, temporary } from './helpers.mjs';
 
 function fixture(t, host = 'codex') {

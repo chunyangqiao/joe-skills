@@ -1,8 +1,23 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": ["pnpm-lock.yaml", "tests/fixtures/**"],
+  "ignorePatterns": ["pnpm-lock.yaml", "tests/**/fixtures/**"],
   "endOfLine": "lf",
   "singleQuote": true,
   "tabWidth": 2,
-  "printWidth": 100
+  "printWidth": 100,
+  "overrides": [
+    {
+      "files": ["**/*.mjs"],
+      "options": {
+        "semi": true,
+        "trailingComma": "all",
+        "arrowParens": "always",
+        "quoteProps": "as-needed",
+        "sortImports": {
+          "newlinesBetween": false,
+          "groups": ["builtin", "external", ["parent", "sibling", "index"]]
+        }
+      }
+    }
+  ]
 }

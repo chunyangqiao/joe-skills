@@ -1,0 +1,72 @@
+{
+  "id": "01-settings",
+  "title": "Account settings — mixed hierarchy, grouping, grey-on-teal",
+  "workflow": "D",
+  "file": "index.html",
+  "prompt": "对 tests/ui-design/fixtures/audits/01-settings/index.html 做设计评审（Workflow D，只诊断、不改文件）。这是 Lumen 发票产品的设置页。项目已有主色 #0f766e（teal），不是 indigo。请先探测技术栈，有条件就打开页面看渲染，按七个视角出 finding 表，每条必须挂规则号。",
+  "stack": {
+    "framework": "plain HTML",
+    "tokens": "primary #0f766e documented in the file; treat as an existing system"
+  },
+  "pass_bar": "Must catch the three solid actions (including destructive-as-primary), grey text on the teal banner, and equal inner/outer form spacing.",
+  "must": [
+    {
+      "rules": [
+        "ui.action-rank"
+      ],
+      "severity": "P0",
+      "severity_floor": "P1",
+      "now": "Save, Preview, and Delete account are three equal solid primary buttons; Delete is destructive and currently as loud as Save"
+    },
+    {
+      "rules": [
+        "ui.surface-text"
+      ],
+      "severity": "P1",
+      "severity_floor": "P1",
+      "now": "Banner subtitle is grey (#9ca3af) on a teal background"
+    },
+    {
+      "rules": [
+        "ui.group-spacing"
+      ],
+      "severity": "P0",
+      "severity_floor": "P1",
+      "now": "Label-to-input gap is 16px and group-to-group gap is 16px — grouping is visually ambiguous"
+    }
+  ],
+  "should": [
+    {
+      "rules": [
+        "ui.uppercase-tracking"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "PROFILE kicker is uppercase with default letter-spacing"
+    },
+    {
+      "rules": [
+        "ui.separation"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "Card uses border + large shadow + white-on-grey — three separations for one job"
+    },
+    {
+      "rules": [
+        "ui.elevation"
+      ],
+      "severity": "P1",
+      "severity_floor": "P2",
+      "now": "Static settings card carries a modal-scale shadow"
+    }
+  ],
+  "forbidden": [
+    {
+      "rules": [
+        "ui.brand-color"
+      ],
+      "why": "System UI and teal primary are the project's personality, not defects. Do not 'fix' the brand to indigo."
+    }
+  ]
+}

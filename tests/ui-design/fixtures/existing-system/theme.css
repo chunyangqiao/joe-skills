@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --app-canvas: #fafafa;
+  --app-ink: #18181b;
+  --app-brand: #0f766e;
+  --app-on-brand: #ffffff;
+  --app-line: #71717a;
+}
+
+.dark {
+  --app-canvas: #18181b;
+  --app-ink: #fafafa;
+  --app-brand: #5eead4;
+  --app-on-brand: #042f2e;
+  --app-line: #a1a1aa;
+}
+
+@theme inline {
+  --color-canvas: var(--app-canvas);
+  --color-ink: var(--app-ink);
+  --color-brand: var(--app-brand);
+  --color-on-brand: var(--app-on-brand);
+  --color-line: var(--app-line);
+}

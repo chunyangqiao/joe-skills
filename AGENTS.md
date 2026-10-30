@@ -12,13 +12,13 @@ Read that skill's `SKILL.md` before changing how it installs or runs. For Agent 
 
 ## Style
 
-Write runtime JavaScript as ESM (`.mjs`) and format with the `format` script.
+Write runtime JavaScript as ESM (`.mjs`) and format with the `format` script. When adding or editing `.mjs`, follow `docs/engineering/conventions.md`.
 
 Agent Orchestration role ids are lowercase kebab-case, matching `skills/agent-orchestration/docs/roles/<role>.md`. Generated profile names start with `crew-`. Keep the role header, the matching host file, and the generator in agreement.
 
 ## Tests
 
-Add tests with `node:test` in `tests/*.test.mjs`. Keep filesystem fixtures in temporary directories. When Agent Orchestration behavior changes, follow `skills/agent-orchestration/references/evaluation.md`, and record static tests, live host loading, model selection, and permissions as separate results.
+Add tests with `node:test` in `tests/<skill>/*.test.mjs`. Keep filesystem fixtures in temporary directories. When Agent Orchestration behavior changes, follow `skills/agent-orchestration/references/evaluation.md`, and record static tests, live host loading, model selection, and permissions as separate results.
 
 ## Commits and pull requests
 
