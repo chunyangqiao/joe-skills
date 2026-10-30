@@ -11,4 +11,4 @@ A personal collection of agent skills.
 | [agent-orchestration](skills/agent-orchestration/README.md) | Portable multi-agent orchestration for Codex, Claude Code, Kimi Code, and Cursor. |
 | [setup-oxc-pre-commit](skills/setup-oxc-pre-commit/README.md) | Configure Oxfmt, Oxlint, Husky, and lint-staged so JavaScript and TypeScript commits format and lint staged files. |
 
-Contribution and development commands are in [AGENTS.md](AGENTS.md).
+Contribution guidelines are in [AGENTS.md](AGENTS.md).

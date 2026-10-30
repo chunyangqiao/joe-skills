@@ -1,64 +1,33 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+Each installable skill lives in `skills/<name>/` and includes `SKILL.md`, `README.md`, `README.zh-CN.md`, and a copy of the root `LICENSE`. Development tooling stays at the repository root.
 
-Agent Orchestration coordinates subagents and generates profiles for Codex, Claude Code, Kimi Code, and Cursor.
+## Develop
 
-The complete installable skill lives in `skills/agent-orchestration/`. Paths in the following skill inventory are relative to that directory:
+Run the scripts in `package.json` from the repository root. Skill runtime code uses Node.js built-ins and local modules only, and requires Node.js 22 or newer. Development tooling in this repository requires Node.js 22.22.1 or newer.
 
-- `README.md` and `README.zh-CN.md` are the skill guides.
-- `SKILL.md` defines the coordination workflow.
-- `scripts/configure.mjs` is the CLI. `scripts/lib/` contains document loading, configuration, installation, and bootstrap.
-- `docs/roles/*.md` holds one role each: a JSON header for description, access, and when to delegate, then the duty text. `docs/common.md` is shared child text and is not a role. `docs/hosts/*.json` holds official links, limits, encoding, paths, and recommended pins.
-- `references/` covers evaluation and interactive testing.
-- `agents/openai.yaml` supplies skill UI metadata, not an executable agent profile.
+An installed skill ships without `package.json` or dependencies. Run its commands from the skill directory, or pass the script's absolute path from elsewhere. Runtime modules resolve resources from `SKILL_ROOT`. Tests resolve repository fixtures from `REPO_ROOT`.
 
-Repository development files stay at the root:
+Read that skill's `SKILL.md` before changing how it installs or runs. For Agent Orchestration adapter, routing, or installation changes, also read `skills/agent-orchestration/references/evaluation.md` and `skills/agent-orchestration/docs/hosts/<host>.json`. Preview an installation before writing it, preserve unrelated profiles and local edits to managed files, and resolve a reported conflict before applying.
 
-- `tests/*.test.mjs` exercises CLI, installation, and bootstrap. Legacy fixtures preserve rejected Python v1 configuration evidence.
-- `package.json`, the lockfile, and formatting/hook configuration provide development tools and repository command shortcuts.
-- The root README files describe the skill collection. Each skill includes `README.md` and `README.zh-CN.md`. `AGENTS.md` describes contribution. The root license is also included in each installable skill.
+## Style
 
-## Build, Test, and Development Commands
+Write runtime JavaScript as ESM (`.mjs`) and format with the `format` script.
 
-Runtime scripts require Node.js 22+ with no dependency installation or build step for users. The CLI uses Node.js built-ins and local modules. Development tooling requires Node.js 22.22.1+ (24 LTS recommended). Install development dependencies with the package manager declared in `package.json`, then run commands from the repository root:
+Agent Orchestration role ids are lowercase kebab-case, matching `skills/agent-orchestration/docs/roles/<role>.md`. Generated profile names start with `crew-`. Keep the role header, the matching host file, and the generator in agreement.
 
-```bash
-pnpm format
-pnpm format:check
-pnpm test
-pnpm run configure --help
-pnpm run configure init --host codex --config /tmp/crew-dev.json
-pnpm run configure render --config /tmp/crew-dev.json
-pnpm run configure install --config /tmp/crew-dev.json --scope project --root /tmp/crew-sandbox
-```
+## Tests
 
-The direct repository entrypoint is `node skills/agent-orchestration/scripts/configure.mjs`. An installed skill has no `package.json`; run `node scripts/configure.mjs` from its directory or use its absolute path from another working directory. Runtime modules resolve resources from `SKILL_ROOT`; tests use `REPO_ROOT` for repository fixtures.
+Add tests with `node:test` in `tests/*.test.mjs`. Keep filesystem fixtures in temporary directories. When Agent Orchestration behavior changes, follow `skills/agent-orchestration/references/evaluation.md`, and record static tests, live host loading, model selection, and permissions as separate results.
 
-`init` refuses overwrites. `install` writes require `--apply`; afterward, use `check` with the same configuration, scope, and root. Agents collect model and thinking-strength choices in conversation and use the non-interactive commands.
+## Commits and pull requests
 
-## Coding Style & Naming Conventions
+Use a short imperative summary, optionally prefixed with `feat:`, `fix:`, or `docs:`. Commit messages, pull request descriptions, and explanations describe the change itself, with no co-author trailer and no agent identity.
 
-Use JavaScript ESM (`.mjs`), two-space indentation, `camelCase` functions, `PascalCase` classes, and `UPPER_CASE` constants. Keep runtime imports limited to Node.js built-ins and local modules. JSON uses two-space indentation and a trailing newline. Oxfmt formats `.mjs`, JSON, and YAML files with LF line endings using `.oxfmtrc.json`; the lockfile and legacy fixtures are excluded. No linter is configured.
+In a Git checkout, `pnpm prepare` enables the hook in `.husky/pre-commit`.
 
-Use lowercase kebab-case role IDs, matching the skill's `docs/roles/<role>.md`; generated profile names start with `crew-`. Keep role headers, host files, and generator behavior consistent.
+A pull request states the behavior change, the hosts it affects, test results, and any runtime verification still open. Include a generated-output example when profiles change.
 
-## Testing Guidelines
+## Configuration
 
-Use `node:test` and `*.test.mjs` files. Keep filesystem tests in temporary directories. `smol-toml` and `yaml` are development-only independent output parsers. Cover changed validation, rendering, conflicts, idempotency, and rollback across affected hosts. Preserve legacy fixtures as rejected schema 1 evidence and verify a complete isolated skill copy without repository files or `node_modules`. No numeric coverage threshold is configured.
-
-Read [evaluation](skills/agent-orchestration/references/evaluation.md) for adapter or routing changes. Distinguish passing static tests from verified host loading, model selection, and permissions.
-
-## Commit & Pull Request Guidelines
-
-Use short, imperative commit summaries, optionally prefixed with `feat:`, `fix:`, or `docs:`.
-
-When committing, do not add any co-author attribution, and do not reveal the identity of the agent in commit messages, PR descriptions, or any explanatory text.
-
-In a Git checkout, `pnpm prepare` enables the Husky pre-commit hook, which formats staged `.mjs`, JSON, and YAML files with lint-staged and runs `pnpm test`.
-
-PRs should explain the behavior change, affected hosts, linked issues when applicable, test results, and runtime verification gaps. Include generated-output examples for profile changes.
-
-## Configuration Safety
-
-Keep credentials in host configuration and personal choices outside the skill directory; repository-root `.crew/` is outside the skill and remains ignored. Preview changes before applying them. Preserve unrelated profiles and locally edited managed files; resolve reported conflicts explicitly. Read [SKILL.md](skills/agent-orchestration/SKILL.md) and the matching `docs/hosts/<host>.json` before changing installation behavior.
+Keep credentials and personal choices outside skill directories. Repository-root `.crew/` is local project configuration and is gitignored.
