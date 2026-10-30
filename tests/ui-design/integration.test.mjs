@@ -26,7 +26,7 @@ test('generated v4 theme compiles', async (t) => {
 
 test('all shipped skill document links resolve and package contains required files', async () => {
   const root = path.join(REPO_ROOT, 'skills/ui-design');
-  for (const file of ['SKILL.md', 'README.md', 'README.zh-CN.md', 'LICENSE', 'agents/openai.yaml'])
+  for (const file of ['SKILL.md', 'README.md', 'README.zh-CN.md', 'agents/openai.yaml'])
     await readFile(path.join(root, file));
   const instructions = await readFile(path.join(root, 'SKILL.md'), 'utf8');
   const frontmatter = parseYaml(/^---\n([\s\S]*?)\n---/.exec(instructions)[1]);
@@ -41,10 +41,6 @@ test('all shipped skill document links resolve and package contains required fil
       metadata.interface.short_description.length <= 64,
   );
   assert.notEqual(metadata.policy?.allow_implicit_invocation, false);
-  assert.equal(
-    await readFile(path.join(root, 'LICENSE'), 'utf8'),
-    await readFile(path.join(REPO_ROOT, 'LICENSE'), 'utf8'),
-  );
   async function visit(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const filename = path.join(directory, entry.name);

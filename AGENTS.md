@@ -1,6 +1,6 @@
 # Repository Guidelines
 
-Each installable skill lives in `skills/<name>/` and includes `SKILL.md`, `README.md`, `README.zh-CN.md`, and a copy of the root `LICENSE`. Development tooling stays at the repository root.
+Each installable skill lives in `skills/<name>/` and includes `SKILL.md`, `README.md`, and `README.zh-CN.md`. The repository root `LICENSE` is the MIT notice for every skill. Development tooling stays at the repository root.
 
 ## Develop
 

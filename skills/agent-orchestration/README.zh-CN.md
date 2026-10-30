@@ -50,7 +50,7 @@ Kimi 以 Markdown Agent 为目标。kimi-cli 的旧版 YAML Agent 文件是另�
 
 ### 手动安装
 
-通过宿主的技能安装机制部署本目录。保留目录名 `agent-orchestration`，包含其中的 README、脚本、文档、参考资料、元数据和许可证。在已安装的技能目录中预览并应用配置：
+通过宿主的技能安装机制部署本目录。保留目录名 `agent-orchestration`，包含其中的 README、脚本、文档、参考资料和元数据。在已安装的技能目录中预览并应用配置：
 
 ```bash
 node --version

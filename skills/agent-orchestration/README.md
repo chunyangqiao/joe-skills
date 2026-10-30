@@ -51,7 +51,7 @@ The configuration CLI requires **Node.js 22+**; Node.js 24 LTS is recommended. R
 
 ### Manual installation
 
-Deploy this directory through your host's skill installation mechanism. Keep its directory name as `agent-orchestration` and include its README files, scripts, docs, references, metadata, and license. From the installed skill directory, preview and apply a configuration:
+Deploy this directory through your host's skill installation mechanism. Keep its directory name as `agent-orchestration` and include its README files, scripts, docs, references, and metadata. From the installed skill directory, preview and apply a configuration:
 
 ```bash
 node --version
