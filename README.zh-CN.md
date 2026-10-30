@@ -64,10 +64,10 @@ pnpm test
 | 命令 | 用途 |
 | --- | --- |
 | `pnpm run configure --help` | 查看 CLI 命令和选项 |
-| `pnpm run configure:bootstrap` | 预览配置和角色文件；添加 `--apply` 后保存、安装并检查 |
-| `pnpm run configure:init` | 创建源配置；目标文件已存在时拒绝写入 |
-| `pnpm run configure:render` | 展示生成的角色配置，不执行安装 |
-| `pnpm run configure:install` | 预览角色配置变更；添加 `--apply` 后写入 |
-| `pnpm run configure:check` | 对比已安装的角色配置与源配置 |
+| `pnpm run configure bootstrap` | 预览配置和角色文件；添加 `--apply` 后保存、安装并检查 |
+| `pnpm run configure init` | 创建源配置；目标文件已存在时拒绝写入 |
+| `pnpm run configure render` | 展示生成的角色配置，不执行安装 |
+| `pnpm run configure install` | 预览角色配置变更；添加 `--apply` 后写入 |
+| `pnpm run configure check` | 对比已安装的角色配置与源配置 |
 
 仓库中的 Node 入口为 `node skills/agent-orchestration/scripts/configure.mjs <command>`。

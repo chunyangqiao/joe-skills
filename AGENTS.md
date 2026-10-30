@@ -28,9 +28,9 @@ pnpm format
 pnpm format:check
 pnpm test
 pnpm run configure --help
-pnpm run configure:init --host codex --config /tmp/crew-dev.json
-pnpm run configure:render --config /tmp/crew-dev.json
-pnpm run configure:install --config /tmp/crew-dev.json --scope project --root /tmp/crew-sandbox
+pnpm run configure init --host codex --config /tmp/crew-dev.json
+pnpm run configure render --config /tmp/crew-dev.json
+pnpm run configure install --config /tmp/crew-dev.json --scope project --root /tmp/crew-sandbox
 ```
 
 The direct repository entrypoint is `node skills/agent-orchestration/scripts/configure.mjs`. An installed skill has no `package.json`; run `node scripts/configure.mjs` from its directory or use its absolute path from another working directory. Runtime modules resolve resources from `SKILL_ROOT`; tests use `REPO_ROOT` for repository fixtures.

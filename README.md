@@ -64,10 +64,10 @@ In an installed Agent Orchestration directory, use `node scripts/configure.mjs <
 | Command | Purpose |
 | --- | --- |
 | `pnpm run configure --help` | Show CLI commands and options |
-| `pnpm run configure:bootstrap` | Preview configuration and profiles; add `--apply` to save, install, and check |
-| `pnpm run configure:init` | Create a source configuration; refuses an existing file |
-| `pnpm run configure:render` | Display generated profiles without installing them |
-| `pnpm run configure:install` | Preview profile changes; add `--apply` to write them |
-| `pnpm run configure:check` | Compare installed profiles with the source configuration |
+| `pnpm run configure bootstrap` | Preview configuration and profiles; add `--apply` to save, install, and check |
+| `pnpm run configure init` | Create a source configuration; refuses an existing file |
+| `pnpm run configure render` | Display generated profiles without installing them |
+| `pnpm run configure install` | Preview profile changes; add `--apply` to write them |
+| `pnpm run configure check` | Compare installed profiles with the source configuration |
 
 The repository entrypoint is `node skills/agent-orchestration/scripts/configure.mjs <command>`.
