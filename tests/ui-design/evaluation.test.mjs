@@ -3,12 +3,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import {
-  findingRules,
-  loadCases,
-  scoreAudit,
-  scoreDirectory,
-} from '../../scripts/evaluate-ui-design.mjs';
+import { findingRules, loadCases, scoreAudit, scoreDirectory } from './harness/evaluate.mjs';
 
 test('audit matching counts findings, not prose, code examples or rule prefixes', () => {
   const found = findingRules(

@@ -6,13 +6,15 @@ installed skill. Development dependencies stay at the repository root.
 - `pnpm test` runs repository tests, including Token/CLI, audit scorer, and real
   Tailwind v4 compilation checks.
 - `pnpm format:check` checks the maintained JavaScript, TSX, JSON and YAML.
-- `pnpm check:ui` runs the focused compilation and package checks.
-- `pnpm preview:ui --serve` serves the generated token preview, the scoped alias
-  check, and the eight audit fixtures on loopback. Inspect an audit fixture at
-  375px and 1280px when that case is in scope.
-- `pnpm eval:ui --self-check` checks the eight preserved audit fixtures only.
-- `pnpm eval:ui --reports /absolute/report-directory` checks reports from a real
-  independent agent run; missing reports fail.
+- `node --test tests/ui-design/integration.test.mjs` runs the focused compilation
+  and package checks. `node --test tests/ui-design` runs every ui-design test.
+- `node tests/ui-design/harness/preview.mjs --serve` serves the generated token
+  preview, the scoped alias check, and the eight audit fixtures on loopback.
+  Inspect an audit fixture at 375px and 1280px when that case is in scope.
+- `node tests/ui-design/harness/evaluate.mjs --self-check` checks the eight
+  preserved audit fixtures only.
+- `node tests/ui-design/harness/evaluate.mjs --reports /absolute/report-directory`
+  checks reports from a real independent agent run; missing reports fail.
 
 Fixtures live under `tests/ui-design/fixtures/`: eight source HTML/gold
 diagnostic cases, invocation prompts, and two generation tasks (in-place tokens

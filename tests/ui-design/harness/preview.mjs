@@ -5,11 +5,12 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs, promisify } from 'node:util';
-import { emitCss } from '../skills/ui-design/scripts/lib/emit.mjs';
+import { emitCss } from '../../../skills/ui-design/scripts/lib/emit.mjs';
 
 const run = promisify(execFile);
-export const REPO_ROOT = fileURLToPath(new URL('../', import.meta.url));
+export const REPO_ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const SKILL_ROOT = path.join(REPO_ROOT, 'skills/ui-design');
+const AUDIT_ROOT = fileURLToPath(new URL('../fixtures/audits', import.meta.url));
 
 async function linkNodeModules(root) {
   const target = path.join(REPO_ROOT, 'node_modules');
@@ -83,10 +84,7 @@ export async function servePreview(root, port = 4178) {
     '07-hero',
     '08-blotter',
   ]) {
-    files.set(`/audits/${id}`, [
-      path.join(REPO_ROOT, 'tests/ui-design/fixtures/audits', id, 'index.html'),
-      'text/html',
-    ]);
+    files.set(`/audits/${id}`, [path.join(AUDIT_ROOT, id, 'index.html'), 'text/html']);
   }
   const server = createServer(async (request, response) => {
     const file = files.get(new URL(request.url, 'http://localhost').pathname);
@@ -119,7 +117,9 @@ async function main() {
     },
   });
   if (values.help) {
-    console.log('pnpm preview:ui [--out DIRECTORY] [--serve] [--port 4178]');
+    console.log(
+      'node tests/ui-design/harness/preview.mjs [--out DIRECTORY] [--serve] [--port 4178]',
+    );
     return;
   }
   const port = Number(values.port);

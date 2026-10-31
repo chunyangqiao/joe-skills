@@ -4,8 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 
-export const REPO_ROOT = fileURLToPath(new URL('../', import.meta.url));
-export const CASE_ROOT = path.join(REPO_ROOT, 'tests/ui-design/fixtures/audits');
+export const CASE_ROOT = fileURLToPath(new URL('../fixtures/audits', import.meta.url));
 
 export function findingRules(report) {
   const rules = new Set();
@@ -97,7 +96,7 @@ async function main() {
     },
   });
   if (values.help) {
-    console.log('node scripts/evaluate-ui-design.mjs --self-check | --reports DIRECTORY');
+    console.log('node tests/ui-design/harness/evaluate.mjs --self-check | --reports DIRECTORY');
     return;
   }
   if (values['self-check']) {

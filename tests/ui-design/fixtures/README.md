@@ -9,7 +9,7 @@ plus only the `prompt` from `expected.json` (paths have been relocated to this
 fixture directory). Keep expected labels hidden from the evaluating
 agent. Record reports as `<case-id>.md` outside the tracked fixture directory.
 
-Run `node scripts/evaluate-ui-design.mjs --reports /absolute/reports` to
+Run `node tests/ui-design/harness/evaluate.mjs --reports /absolute/reports` to
 check all eight reports. Missing reports fail. Every must rule must be found;
 forbidden rule findings fail; should recall is informational. Finding-table
 matching does not verify the cited evidence or proposed fix. `--self-check`

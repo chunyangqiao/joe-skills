@@ -3,7 +3,7 @@ import { readdir, readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import { parse as parseYaml } from 'yaml';
-import { buildPreview, REPO_ROOT } from '../../scripts/preview-ui-design.mjs';
+import { buildPreview, REPO_ROOT } from './harness/preview.mjs';
 
 test('generated v4 theme compiles', async (t) => {
   const root = await buildPreview();

@@ -11,9 +11,6 @@
     "format:check": "oxfmt --check \"**/*.{mjs,tsx,json,yaml,yml}\"",
     "lint-staged": "lint-staged",
     "test": "node --test \"tests/**/*.test.mjs\"",
-    "check:ui": "node --test tests/ui-design/integration.test.mjs",
-    "preview:ui": "node scripts/preview-ui-design.mjs",
-    "eval:ui": "node scripts/evaluate-ui-design.mjs",
     "configure": "node skills/agent-orchestration/scripts/configure.mjs",
     "prepare": "husky"
   },
