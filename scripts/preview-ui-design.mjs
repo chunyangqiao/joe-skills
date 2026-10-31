@@ -11,6 +11,18 @@ const run = promisify(execFile);
 export const REPO_ROOT = fileURLToPath(new URL('../', import.meta.url));
 const SKILL_ROOT = path.join(REPO_ROOT, 'skills/ui-design');
 
+async function linkNodeModules(root) {
+  const target = path.join(REPO_ROOT, 'node_modules');
+  const link = path.join(root, 'node_modules');
+  try {
+    await symlink(target, link, 'dir');
+  } catch (error) {
+    if (error.code === 'EEXIST') return;
+    if (error.code !== 'EPERM' && error.code !== 'EACCES') throw error;
+    await symlink(target, link, 'junction');
+  }
+}
+
 export async function buildPreview({ out, brand = '#0f766e' } = {}) {
   const root = out ? path.resolve(out) : await mkdtemp(path.join(tmpdir(), 'ui-design-preview-'));
   await mkdir(root, { recursive: true });
@@ -24,11 +36,7 @@ export async function buildPreview({ out, brand = '#0f766e' } = {}) {
     '--out',
     path.join(root, 'design'),
   ]);
-  await symlink(path.join(REPO_ROOT, 'node_modules'), path.join(root, 'node_modules'), 'dir').catch(
-    (error) => {
-      if (error.code !== 'EEXIST') throw error;
-    },
-  );
+  await linkNodeModules(root);
   await writeFile(
     path.join(root, 'probe.html'),
     '<div class="bg-primary bg-background text-foreground border-input rounded-lg min-h-11"></div>\n',

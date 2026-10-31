@@ -11,5 +11,6 @@ A personal collection of agent skills.
 | [agent-orchestration](skills/agent-orchestration/README.md) | Portable multi-agent orchestration for Codex, Claude Code, Kimi Code, and Cursor. |
 | [ui-design](skills/ui-design/README.md) | Design Tailwind CSS v4 tokens and adjust shadcn components in the user's project. |
 | [setup-oxc-pre-commit](skills/setup-oxc-pre-commit/README.md) | Configure Oxfmt, Oxlint, Husky, and lint-staged so JavaScript and TypeScript commits format and lint staged files. |
+| [windows-powershell](skills/windows-powershell/README.md) | Rewrite shell commands so they parse in Windows PowerShell 5.1. |
 
 Contribution guidelines are in [AGENTS.md](AGENTS.md).

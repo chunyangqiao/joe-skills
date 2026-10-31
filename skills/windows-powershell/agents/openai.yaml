@@ -1,0 +1,7 @@
+interface:
+  display_name: 'Windows PowerShell'
+  short_description: 'Rewrite commands for Windows PowerShell 5.1'
+  default_prompt: 'Use $windows-powershell for shell commands on Windows. Read SKILL.md and follow it. Write PowerShell 5.1, and rewrite a command once if it fails to parse.'
+
+policy:
+  allow_implicit_invocation: true
